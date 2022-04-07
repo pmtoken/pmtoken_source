@@ -19,6 +19,7 @@ export FABRIC_CFG_PATH=${PWD}/config
 
 CHANNEL_NAME="mychannel"
 
+
 # create channel
 infoln "Generating channel create transaction '${CHANNEL_NAME}.tx'"
 set -x
@@ -50,12 +51,12 @@ peer channel join -b ./channel-artifacts/${CHANNEL_NAME}.block >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
 
-# join channel (peer1.org1.com)
-infoln "Joining peer1.org2 to the channel..."
+# join channel (peer0.org2.com)
+infoln "Joining org2 peer to the channel..."
 export CORE_PEER_TLS_ENABLED=true
-export CORE_PEER_LOCALMSPID="Org1MSP"
-export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt
-export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_LOCALMSPID="Org2MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
 export CORE_PEER_ADDRESS=localhost:9051
 
 set -x
@@ -64,17 +65,15 @@ peer channel join -b ./channel-artifacts/${CHANNEL_NAME}.block >&log.txt
 cat log.txt
 
 
-# join channel (peer2.org1.com)
-infoln "Joining peer2.org1 to the channel..."
+# join channel (peer0.org3.com)
+infoln "Joining org3 peer to the channel..."
 export CORE_PEER_TLS_ENABLED=true
-export CORE_PEER_LOCALMSPID="Org1MSP"
-export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/tls/ca.crt
-export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_LOCALMSPID="Org3MSP"
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
 export CORE_PEER_ADDRESS=localhost:11051
 
 set -x
 peer channel join -b ./channel-artifacts/${CHANNEL_NAME}.block >&log.txt
 { set +x; } 2>/dev/null
 cat log.txt
-
-

@@ -59,8 +59,9 @@ async function cc_call(fn_name, args) {
     } else if (fn_name == "addRating") {
         e = args[0];
         p = args[1];
-        s = args[2];
-        result = await contract.submitTransaction("addRating", e, p, s);
+        pc = args[2];
+        s = args[3];
+        result = await contract.submitTransaction("addRating", e, p, pc, s);
     } else if (fn_name == "readRating")
         result = await contract.evaluateTransaction("readRating", args);
     else result = "not supported function";
@@ -83,12 +84,14 @@ app.post("/mate", async (req, res) => {
 app.post("/score", async (req, res) => {
     const email = req.body.email;
     const prj = req.body.project;
+    const prjc = req.body.projectc;
     const sc = req.body.score;
     console.log("add project email: " + email);
     console.log("add project name: " + prj);
+    console.log("add project content: " + prjc);
     console.log("add project score: " + sc);
 
-    var args = [email, prj, sc];
+    var args = [email, prj, prjc, sc];
     result = await cc_call("addRating", args);
 
     const myobj = { result: "success" };

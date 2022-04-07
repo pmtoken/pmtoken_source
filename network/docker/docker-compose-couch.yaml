@@ -39,6 +39,7 @@ services:
     networks:
       - test
 
+
   couchdb2:
     container_name: couchdb2
     image: couchdb:3.1.1
@@ -53,4 +54,3 @@ services:
       - "9984:5984"
     networks:
       - test
-  

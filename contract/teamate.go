@@ -19,9 +19,17 @@ type UserRating struct{
 }
 type Rate struct{
 	ProjectTitle string  `json:"projecttitle"`
+	ProjectContent string  `json:"projectcontent"`
 	Score float64 `json:"score"`
 }
  
+//type Rate struct{
+//	ProjectTitle string  `json:"projecttitle"`
+//	ProjectContent string  `json:"projectcontent"`
+//	Score []Score `json:"score"`
+//}
+
+
 func (s *SmartContract) AddUser(ctx contractapi.TransactionContextInterface, username string) error {
 
 	var user = UserRating{User: username, Average: 0}
@@ -30,7 +38,7 @@ func (s *SmartContract) AddUser(ctx contractapi.TransactionContextInterface, use
 	return ctx.GetStub().PutState(username, userAsBytes)
 }
 
-func (s *SmartContract) AddRating(ctx contractapi.TransactionContextInterface, username string, prjTitle string, prjscore string) error {
+func (s *SmartContract) AddRating(ctx contractapi.TransactionContextInterface, username string, prjTitle string, prjContent string, prjscore string) error {
 	
 	// getState User 
 	userAsBytes, err := ctx.GetStub().GetState(username)	
@@ -48,7 +56,7 @@ func (s *SmartContract) AddRating(ctx contractapi.TransactionContextInterface, u
 	}
 	// create rate structure
 	newRate, _ := strconv.ParseFloat(prjscore,64) 
-	var Rate = Rate{ProjectTitle: prjTitle, Score: newRate}
+	var Rate = Rate{ProjectTitle: prjTitle, ProjectContent: prjContent, Score: newRate}
 
 	rateCount := float64(len(user.Rates))
 

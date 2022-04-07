@@ -40,6 +40,19 @@ cryptogen generate --config=./config/crypto-config-org1.yaml --output="organizat
 res=$?
 { set +x; } 2>/dev/null
 
+subinfoln "Creating Org2 Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-org2.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
+
+subinfoln "Creating Org3 Identities"
+
+set -x
+cryptogen generate --config=./config/crypto-config-org3.yaml --output="organizations"
+res=$?
+{ set +x; } 2>/dev/null
 
 subinfoln "Creating Orderer Org Identities"
 
